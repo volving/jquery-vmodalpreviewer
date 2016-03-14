@@ -1,0 +1,159 @@
+div,
+p,
+span,
+ul,
+li,
+a,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+.vmpModal {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(64, 64, 64, 0.6);
+  z-index: 666;
+  cursor: pointer;
+}
+.vmpModal canvas {
+  position: absolute;
+  z-index: 1;
+}
+.vmpModal .closeButton {
+  display: inline-block;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0;
+  font-family: sans-serif;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  font-size: 30px;
+  line-height: 36px;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+.vmpModal .closeButton:hover {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+.vmpModal .scaleIndicator {
+  display: inline-block;
+  position: absolute;
+  bottom: 2em;
+  text-align: center;
+  z-index: 2;
+}
+.vmpModal .toolbar {
+  width: 250px;
+  height: 24px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  bottom: 1em;
+  left: 50%;
+  margin-left: -125px;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.vmpModal .toolbar .button,
+.vmpModal .toolbar .imgScale {
+  display: inline-block;
+  position: relative;
+  float: left;
+  height: 24px;
+  line-height: 24px;
+}
+.vmpModal .toolbar .button {
+  position: relative;
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFF;
+  cursor: pointer;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.vmpModal .toolbar .button.minusButton {
+  -webkit-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.vmpModal .toolbar .button.plusButton {
+  -webkit-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.vmpModal .toolbar .button:hover {
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.vmpModal .toolbar .imgScale {
+  margin: 0 auto;
+  bottom: 0;
+  width: 210px;
+}
+.vModalPreviewer {
+  width: 1280px;
+  height: 800px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 3px 3px red;
+  box-shadow: 0 0 3px 3px red;
+}
+.vModalPreviewer ul {
+  list-style: none;
+}
+.vModalPreviewer .imgList {
+  display: block;
+}
+.vModalPreviewer .imgList li {
+  display: inline-block;
+  float: left;
+}
+.vModalPreviewer .imgList li img {
+  width: 64px;
+  height: 40px;
+}
