@@ -87,6 +87,7 @@ $(function() {
     }
 
     function reDraw(scale, offset) {
+        initCanvas();
         if (!offset) {
             s = $.extend(s, centralContainize(drawnImage, canvas, scale, currentWidth * scale, currentHeight * scale));
         } else {
@@ -99,6 +100,8 @@ $(function() {
     function drag(offset) {
         reDraw(currentScale, offset);
     }
+
+
     // -----------------------------------------------Start of init canvas
     if ($canvas) {
         $canvas.on('mousedown', function(e) {
@@ -134,7 +137,6 @@ $(function() {
         });
     }
     // -----------------------------------------------End __of init img elements
-
 
 
     // -----------------------------------------------Start of $closeButton
@@ -208,7 +210,6 @@ $(function() {
     // -----------------------------------------------Start of imgScale
     // <TODO> Boyung:
     $imgScale.on('input', function() {
-        // e.stopPropagation();
         currentScale = Number($imgScale.val());
         reDraw(this.value);
     });

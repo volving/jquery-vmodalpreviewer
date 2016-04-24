@@ -1,5 +1,5 @@
-$(function() {
-    var centralContainize = function(src, dest, scale, customWidth, customHeight) {
+$(function () {
+    var centralContainize = function (src, dest, scale, customWidth, customHeight) {
         if ('object' === typeof src && 'object' === typeof dest) {
             var sw = customWidth || src.naturalWidth;
             var sh = customHeight || src.naturalHeight;
@@ -87,6 +87,7 @@ $(function() {
     }
 
     function reDraw(scale, offset) {
+        initCanvas();
         if (!offset) {
             s = $.extend(s, centralContainize(drawnImage, canvas, scale, currentWidth * scale, currentHeight * scale));
         } else {
@@ -99,13 +100,15 @@ $(function() {
     function drag(offset) {
         reDraw(currentScale, offset);
     }
+
+
     // -----------------------------------------------Start of init canvas
     if ($canvas) {
-        $canvas.on('mousedown', function(e) {
+        $canvas.on('mousedown', function (e) {
             originX = e.offsetX;
             originY = e.offsetY;
             dragFlag = 1;
-        }).on('mousemove', function(e) {
+        }).on('mousemove', function (e) {
             if (dragFlag === 1) {
                 dragVector.x = e.offsetX - originX;
                 dragVector.y = e.offsetY - originY;
@@ -113,7 +116,7 @@ $(function() {
                 originX = e.offsetX;
                 originY = e.offsetY;
             }
-        }).on('mouseup', function(e) {
+        }).on('mouseup', function (e) {
             dragFlag = 0;
         });
     }
@@ -122,7 +125,7 @@ $(function() {
 
     // -----------------------------------------------Start of init img elements
     if ($imgs) {
-        $imgs.on('click', function() {
+        $imgs.on('click', function () {
             originX = 0;
             originY = 0;
             currentScale = 1;
@@ -136,29 +139,28 @@ $(function() {
     // -----------------------------------------------End __of init img elements
 
 
-
     // -----------------------------------------------Start of $closeButton
 
-    $closeButton.on('click', function() {
+    $closeButton.on('click', function () {
         $modal.fadeOut(s.fadeDuration);
     });
     // -----------------------------------------------End __of $closeButton
 
 
     // -----------------------------------------------Start of minusButton
-    $minusButton.on('click', function() {
+    $minusButton.on('click', function () {
         currentScale = Number($imgScale.val());
         if (currentScale > minScale) {
             currentScale -= scaleStep;
             $imgScale.val(currentScale);
             reDraw(currentScale);
         }
-    }).on('mousedown', function(e) {
+    }).on('mousedown', function (e) {
         currentScale = Number($imgScale.val());
         if (currentScale > minScale) {
-            scaleChangeTimeout = setTimeout(function() {
+            scaleChangeTimeout = setTimeout(function () {
                 e.preventDefault();
-                scaleChangeInterval = setInterval(function() {
+                scaleChangeInterval = setInterval(function () {
                     currentScale = Number($imgScale.val());
                     if (currentScale > minScale) {
                         $imgScale.val(currentScale - scaleStep);
@@ -168,7 +170,7 @@ $(function() {
                 }, 100);
             }, 1200);
         }
-    }).on('mouseup', function() {
+    }).on('mouseup', function () {
         clearTimeout(scaleChangeTimeout);
         clearInterval(scaleChangeInterval);
     });
@@ -176,19 +178,19 @@ $(function() {
 
 
     // -----------------------------------------------Start of plusButton
-    $plusButton.on('click', function() {
+    $plusButton.on('click', function () {
         currentScale = Number($imgScale.val());
         if (currentScale < maxScale) {
             currentScale += scaleStep;
             $imgScale.val(currentScale);
             reDraw(currentScale);
         }
-    }).on('mousedown', function(e) {
+    }).on('mousedown', function (e) {
         currentScale = Number($imgScale.val());
         if (currentScale < maxScale) {
-            scaleChangeTimeout = setTimeout(function() {
+            scaleChangeTimeout = setTimeout(function () {
                 e.preventDefault();
-                scaleChangeInterval = setInterval(function() {
+                scaleChangeInterval = setInterval(function () {
                     currentScale = Number($imgScale.val());
                     if (currentScale < maxScale) {
                         $imgScale.val(currentScale + scaleStep);
@@ -198,7 +200,7 @@ $(function() {
                 }, 100);
             }, 1200);
         }
-    }).on('mouseup', function() {
+    }).on('mouseup', function () {
         clearTimeout(scaleChangeTimeout);
         clearInterval(scaleChangeInterval);
     });
@@ -207,19 +209,41 @@ $(function() {
 
     // -----------------------------------------------Start of imgScale
     // <TODO> Boyung:
-    $imgScale.on('input', function() {
-        // e.stopPropagation();
+    $imgScale.on('input', function () {
         currentScale = Number($imgScale.val());
         reDraw(this.value);
     });
     // -----------------------------------------------End __of imgScale
 
 
+    // -----------------------------------------------Start of imgScale
+    var handleMousewheel = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e.deltaY);
+        var wheelChange = false;
+        if (e.deltaY > 0 && currentScale < maxScale) {
+            currentScale += scaleStep;
+            wheelChange = true;
+        } else if (e.deltaY < 0 && currentScale > minScale) {
+            currentScale -= scaleStep;
+            wheelChange = true;
+        }
+        if (wheelChange) {
+            $imgScale.val(currentScale);
+            reDraw(currentScale);
+        }
+    };
+    var vmpModal = $('.vmpModal')[0];
+    vmpModal.onwheel = handleMousewheel;
+    vmpModal.handleMousewheel = handleMousewheel;
+    //$('.vmpModal').on('mousewheel', handleMousewheel).on('dommouse');
+    // -----------------------------------------------End __of imgScale
     initCanvas();
-    $(window).resize(function() {
+    $(window).resize(function () {
         initCanvas();
         $modal.fadeOut(s.fadeDuration);
-    }).on('keydown', function() {
+    }).on('keydown', function () {
         $modal.fadeOut(s.fadeDuration);
     });
 
