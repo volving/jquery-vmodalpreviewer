@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #frame{
+            display: block;
+            position: relative;
+            margin: 20px auto;
+            -webkit-box-shadow: 0 0 2px 2px red;
+                    box-shadow: 0 0 2px 2px red;
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+
+    </div>
+    <script>
+        var frame = document.getElementById('frame');
+        console.log(navigator.userAgent);
+        var userAgentStr = navigator.userAgent;
+        var platform, browser;
+        if (/Windows/i.test(userAgentStr)) {
+            platform = 'Windows';
+        }else if (/Macintosh/i.test(userAgentStr)){
+            platform = 'Macintosh';
+        }else{
+            platform = 'Xinux';
+        }
+        if (/Edge/i.test(userAgentStr)) {   //Windows Edge
+            browser = 'Edge';
+        }else if(/Net/i.test(userAgentStr)){
+        }
+
+        var handleMousewheel = function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log(e.deltaY);
+
+//            console.log(e.deltaY || e.delta);
+
+        };
+        frame.onwheel = frame.onmousewheel = handleMousewheel;
+    </script>
+</body>
+</html>
