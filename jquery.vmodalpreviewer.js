@@ -225,7 +225,7 @@ $(function () {
         if (e.deltaY > 0 && currentScale < maxScale) {
             currentScale += scaleStep;
             wheelChange = true;
-        } else if (e.deltaY < 0 && currentScale > minScale) {
+        } else if (e.deltaY < 0 && currentScale > minScale + scaleStep) {
             currentScale -= scaleStep;
             wheelChange = true;
         }
@@ -237,7 +237,6 @@ $(function () {
     var vmpModal = $('.vmpModal')[0];
     vmpModal.onwheel = handleMousewheel;
     vmpModal.handleMousewheel = handleMousewheel;
-    //$('.vmpModal').on('mousewheel', handleMousewheel).on('dommouse');
     // -----------------------------------------------End __of imgScale
     initCanvas();
     $(window).resize(function () {
